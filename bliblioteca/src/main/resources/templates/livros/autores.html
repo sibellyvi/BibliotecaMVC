@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="...">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autores | Biblioteca Digital</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header class="cabecalho">
+    <a th:href="@{/livros}" class="logo">BIBLIOTECA</a>
+    <div class="acoes">
+        <a th:href="@{/livros}" class="botao-outline">Página inicial</a>
+    </div>
+</header>
+
+<main class="pagina-modulo">
+
+    <section class="titulo-pagina">
+        <h1>Nossos autores</h1>
+        <p>Conheça os escritores responsáveis pelas obras do nosso acervo.</p>
+    </section>
+
+    <section class="conteudo-pagina">
+
+        <h2>Autores cadastrados</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Nacionalidade</th>
+                <th>Biografia</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td colspan="3">Nenhum autor cadastrado.</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+</main>
+
+<footer>
+    <a th:href="@{/}" class="logo">BIBLIOTECA</a>
+    <p>Leia livros.</p>
+    <span>Biblioteca Digital © 2026</span>
+</footer>
+
+</body>
+</html>

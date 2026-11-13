@@ -1,0 +1,272 @@
+
+/* CONFIGURAÇÕES GERAIS */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #ffffff;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* CABEÇALHO */
+
+.cabecalho {
+    min-height: 118px;
+    padding: 25px 6.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    border-bottom: 1px solid #dedede;
+}
+
+.logo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 29px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #30343b;
+}
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.botao-outline {
+    border: 1px solid #870000;
+    color: #870000;
+    border-radius: 22px;
+    padding: 14px 25px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.botao-outline:hover {
+    background-color: #870000;
+    color: white;
+}
+
+/* APRESENTAÇÃO PRINCIPAL */
+
+.hero {
+    min-height: 670px;
+    padding: 90px 9%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.hero-texto {
+    max-width: 550px;
+}
+
+.hero h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(55px, 5vw, 78px);
+    font-weight: normal;
+    line-height: 1.05;
+    margin: 25px 0 35px;
+    letter-spacing: -2px;
+}
+
+.hero-texto p {
+    font-size: 19px;
+    line-height: 1.7;
+    max-width: 510px;
+    margin-bottom: 48px;
+    color: #282828;
+}
+
+.botao-principal {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    background-color: #870000;
+    color: white;
+    padding: 22px 30px;
+    border-radius: 18px;
+    font-size: 17px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.botao-principal:hover {
+    background-color: #450000;
+    transform: translateY(-2px);
+}
+
+/* IMAGEM */
+
+.hero-visual {
+    height: 450px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* MÓDULOS */
+
+.modulos {
+    padding: 0 7% 90px;
+}
+
+.linha {
+    width: 100%;
+    height: 1px;
+    background-color: #252525;
+    margin-bottom: 40px;
+}
+
+.modulos h2 {
+    font-size: 37px;
+    font-weight: normal;
+    margin-bottom: 55px;
+    letter-spacing: -1px;
+}
+
+.lista-modulos {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid #d9d9d9;
+    text-align: center;
+}
+
+.lista-modulos a {
+    padding: 25px 15px;
+    border-bottom: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+    font-size: 17px;
+    display: flex;
+    justify-content: space-between;
+    transition: 0.3s;
+}
+
+.lista-modulos a:first-child {
+    border-left: 1px solid #d9d9d9;
+}
+
+.lista-modulos a:hover {
+    color: #870000;
+    background-color: #f8f9fc;
+}
+
+/* RODAPÉ */
+
+footer {
+    border-top: 1px solid #dedede;
+    padding: 35px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+footer .logo {
+    font-size: 22px;
+}
+
+footer p,
+footer span {
+    color: #666;
+    font-size: 13px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+
+    .cabecalho {
+        flex-wrap: wrap;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 65px 7%;
+    }
+
+    .hero-visual {
+        width: 100%;
+    }
+
+    .lista-modulos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+        padding: 22px 5%;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .acoes {
+        gap: 8px;
+    }
+
+    .botao-outline {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 55px 6%;
+        gap: 45px;
+    }
+
+    .hero h1 {
+        font-size: 54px;
+    }
+
+    .hero-texto p {
+        font-size: 16px;
+    }
+
+    .hero-visual {
+        height: 330px;
+    }
+
+    .modulos h2 {
+        font-size: 29px;
+    }
+
+    .lista-modulos {
+        grid-template-columns: 1fr;
+    }
+
+    .lista-modulos a {
+        border-left: 1px solid #d9d9d9;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

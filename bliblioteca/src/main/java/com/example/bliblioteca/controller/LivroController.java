@@ -15,11 +15,6 @@ public class LivroController {
         return "livros/inicio";
     }
 
-    @GetMapping("/autores")
-    public String autores() {
-        return "livros/autores";
-    }
-
     @GetMapping("/livros")
     public String exibirLivro(
             Model model) {
@@ -30,16 +25,5 @@ public class LivroController {
 
         model.addAttribute("livro", livro);
         return "livro";
-    }
-    @GetMapping("/autor")
-    public String exibirAutor(
-            Model model) {
-        Autor autor =  new Autor();
-        autor.setNome("Machado de Assis");
-        autor.setNacionalidade("Brasileiro");
-        autor.setObrasPublicadas("978-85-00-00000-0");
-
-        model.addAttribute("autor", autor);
-        return "autor";
     }
 }

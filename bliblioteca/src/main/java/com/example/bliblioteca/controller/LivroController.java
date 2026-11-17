@@ -4,11 +4,19 @@ import org.springframework.ui.Model;
 import com.example.bliblioteca.model.Livro;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/livros")
 public class LivroController {
+
+    private List<Livro> livros = new ArrayList<>();
+
 
     @GetMapping
     public String inicio(){
@@ -26,4 +34,11 @@ public class LivroController {
         model.addAttribute("livro", livro);
         return "livro";
     }
+
+    @PostMapping
+    public String cadastrar(@ModelAttribute Livro livro){
+        livros.add(livro);
+        return "redirect:/livros";
+    }
+
 }

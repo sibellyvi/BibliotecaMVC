@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuários - Biblioteca</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header class="cabecalho">
+    <a th:href="@{/}" class="logo">BIBLIOTECA</a>
+    <a th:href="@{/}" class="botao-outline">Voltar ao início</a>
+</header>
+
+<main class="pagina-conteudo">
+
+    <h1>Gerenciar usuários</h1>
+
+    <p class="descricao">
+        Cadastre e gerencie os usuários da biblioteca.
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 45px; margin-bottom: 60px;">
+
+        <!-- FORMULÁRIO DE CADASTRO -->
+        <section class="formulario"
+                 th:if="${indice == null}"
+                 style="flex: 1 1 350px; margin-bottom: 0;">
+
+            <h2>Cadastrar usuário</h2>
+
+            <form th:action="@{/usuarios}"
+                  th:object="${usuario}"
+                  method="post">
+
+                <label for="nome">Nome completo</label>
+                <input type="text"
+                       id="nome"
+                       th:field="*{nome}"
+                       placeholder="Digite o nome completo"
+                       required>
+
+                <label for="matricula">Matrícula</label>
+                <input type="text"
+                       id="matricula"
+                       th:field="*{matricula}"
+                       placeholder="Digite a matrícula"
+                       required>
+
+                <label for="email">E-mail</label>
+                <input type="email"
+                       id="email"
+                       th:field="*{email}"
+                       placeholder="Digite o e-mail"
+                       required>
+
+                <button type="submit" class="botao-salvar">
+                    Cadastrar usuário
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- FORMULÁRIO DE EDIÇÃO -->
+        <section class="formulario"
+                 th:unless="${indice == null}"
+                 style="flex: 1 1 350px; margin-bottom: 0;">
+
+            <h2>Editar usuário</h2>
+
+            <form th:action="@{/usuarios/editar/{id}(id=${indice})}"
+                  th:object="${usuario}"
+                  method="post">
+
+                <label for="nome-editar">Nome completo</label>
+                <input type="text"
+                       id="nome-editar"
+                       th:field="*{nome}"
+                       required>
+
+                <label for="matricula-editar">Matrícula</label>
+                <input type="text"
+                       id="matricula-editar"
+                       th:field="*{matricula}"
+                       required>
+
+                <label for="email-editar">E-mail</label>
+                <input type="email"
+                       id="email-editar"
+                       th:field="*{email}"
+                       required>
+
+                <button type="submit" class="botao-salvar">
+                    Salvar alterações
+                </button>
+
+                <a th:href="@{/usuarios}" class="botao-cancelar">
+                    Cancelar edição
+                </a>
+
+            </form>
+
+        </section>
+
+        <!-- IMAGEM DOS USUÁRIOS -->
+        <div style="flex: 1 1 280px; display: flex; justify-content: center;">
+
+            <img
+                    src="https://i.pinimg.com/736x/9e/16/55/9e1655e8f5266aab8dff4191e33dd23d.jpg"
+                    alt="Ilustração para cadastro de usuários"
+                    style="width: 100%; max-width: 380px; max-height: 430px; object-fit: contain; border-radius: 12px;">
+
+        </div>
+
+    </div>
+
+    <!-- LISTAGEM DE USUÁRIOS -->
+    <section>
+
+        <h2>Usuários cadastrados</h2>
+
+        <div class="tabela-container">
+
+            <table class="tabela">
+
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Matrícula</th>
+                    <th>E-mail</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="usuario, status : ${usuarios}">
+
+                    <td th:text="${usuario.nome}"></td>
+                    <td th:text="${usuario.matricula}"></td>
+                    <td th:text="${usuario.email}"></td>
+
+                    <td>
+                        <a th:href="@{/usuarios/editar/{id}(id=${status.index})}"
+                           class="botao-editar">
+                            Editar
+                        </a>
+
+                        <form th:action="@{/usuarios/excluir/{id}(id=${status.index})}"
+                              method="post">
+
+                            <input type="hidden" name="_method" value="DELETE">
+
+                            <button type="submit" class="botao-excluir">
+                                Excluir
+                            </button>
+
+                        </form>
+                    </td>
+
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(usuarios)}">
+                    <td colspan="4" class="mensagem-vazia">
+                        Nenhum usuário cadastrado ainda.
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <a th:href="@{/}" class="logo">BIBLIOTECA</a>
+    <p>Leia livros e arrase na vida.</p>
+    <span>Biblioteca Digital © 2026</span>
+</footer>
+
+</body>
+</html>

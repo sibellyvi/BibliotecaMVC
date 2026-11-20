@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="...">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Biblioteca Digital</title>
+    <title>Livros - Biblioteca</title>
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -14,59 +13,191 @@
 <body>
 
 <header class="cabecalho">
-
     <a th:href="@{/}" class="logo">BIBLIOTECA</a>
-
-    <div class="acoes">
-        <a href="#modulos" class="botao-outline">Explorar módulos</a>
-    </div>
-
+    <a th:href="@{/}" class="botao-outline">Voltar ao início</a>
 </header>
 
-<main>
-    <section class="hero">
+<main class="pagina-conteudo">
 
-        <div class="hero-texto">
+    <h1>Gerenciar livros</h1>
 
-            <h1>
-                Boas-vindas ao sistema de biblioteca
-            </h1>
+    <p class="descricao">
+        Cadastre, consulte e gerencie os livros da biblioteca.
+    </p>
 
-            <p>
-                Conheça os livros da nossa bibliotaca.
-            </p>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 45px; margin-bottom: 60px;">
 
-            <a th:href="@{/livros}" class="botao-principal">
-                Ver livros
-            </a>
+        <section class="formulario"
+                 th:if="${indice == null}"
+                 style="flex: 1 1 350px; margin-bottom: 0;">
 
-        </div>
+            <h2>Cadastrar livro</h2>
 
-        <div class="hero-visual">
+            <form th:action="@{/livros}"
+                  th:object="${livro}"
+                  method="post">
+
+                <label for="titulo">Título</label>
+                <input type="text"
+                       id="titulo"
+                       th:field="*{titulo}"
+                       placeholder="Digite o título do livro"
+                       required>
+
+                <label for="autor">Autor</label>
+                <select id="autor" th:field="*{autor}" required>
+                    <option value="">Selecione um autor</option>
+                    <option th:each="autor : ${autores}"
+                            th:value="${autores.indexOf(autor)}"
+                            th:text="${autor.nome}">
+                    </option>
+                </select>
+
+                <label for="categoria">Categoria</label>
+                <select id="categoria" th:field="*{categoria}" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option th:each="categoria : ${categorias}"
+                            th:value="${categorias.indexOf(categoria)}"
+                            th:text="${categoria.genero}">
+                    </option>
+                </select>
+
+                <label for="isbn">ISBN</label>
+                <input type="text"
+                       id="isbn"
+                       th:field="*{isbn}"
+                       placeholder="Digite o ISBN"
+                       required>
+
+                <button type="submit" class="botao-salvar">
+                    Cadastrar livro
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="formulario"
+                 th:unless="${indice == null}"
+                 style="flex: 1 1 350px; margin-bottom: 0;">
+
+            <h2>Editar livro</h2>
+
+            <form th:action="@{/livros/editar/{id}(id=${indice})}"
+                  th:object="${livro}"
+                  method="post">
+
+                <label for="titulo-editar">Título</label>
+                <input type="text"
+                       id="titulo-editar"
+                       th:field="*{titulo}"
+                       required>
+
+                <label for="autor-editar">Autor</label>
+                <select id="autor-editar" name="autor" required>
+                    <option value="">Selecione um autor</option>
+                    <option th:each="autor, status : ${autores}"
+                            th:value="${status.index}"
+                            th:selected="${livro.autor == autor}"
+                            th:text="${autor.nome}">
+                    </option>
+                </select>
+
+                <label for="categoria-editar">Categoria</label>
+                <select id="categoria-editar" name="categoria" required>
+                    <option value="">Selecione uma categoria</option>
+                    <option th:each="categoria, status : ${categorias}"
+                            th:value="${status.index}"
+                            th:selected="${livro.categoria == categoria}"
+                            th:text="${categoria.genero}">
+                    </option>
+                </select>
+
+                <label for="isbn-editar">ISBN</label>
+                <input type="text"
+                       id="isbn-editar"
+                       th:field="*{isbn}"
+                       required>
+
+                <button type="submit" class="botao-salvar">
+                    Salvar alterações
+                </button>
+
+                <a th:href="@{/livros}" class="botao-cancelar">
+                    Cancelar edição
+                </a>
+
+            </form>
+
+        </section>
+
+        <div style="flex: 1 1 280px; display: flex; justify-content: center;">
+
             <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdW0W7C7n0tjMGNBUffqcwEtdWpzRJJkOjYceWLZYrYg&s=10"
-                    alt="Ilustração da biblioteca digital"
-            >
+                    src="https://i.pinimg.com/736x/00/c3/ba/00c3ba6a6428073ea7cc1ed44d5b0785.jpg"
+                    alt="Ilustração para gerenciamento de livros"
+                    style="width: 100%; max-width: 380px; max-height: 430px; object-fit: contain; border-radius: 12px;">
+
         </div>
-    </section>
 
-    <section class="modulos" id="modulos">
+    </div>
 
-        <div class="linha"></div>
+    <section>
 
-        <h2>Conheça nossos módulos</h2>
+        <h2>Livros cadastrados</h2>
 
-        <div class="lista-modulos">
+        <div class="tabela-container">
 
-            <a th:href="@{/livros}">Livros </a>
+            <table class="tabela">
 
-            <a th:href="@{/autores}">Autores </a>
+                <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Categoria</th>
+                    <th>ISBN</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
 
-            <a th:href="@{/categorias}">Categorias </a>
+                <tbody>
 
-            <a th:href="@{/usuarios}">Usuários </a>
+                <tr th:each="livro, status : ${livros}">
 
-            <a th:href="@{/emprestimos}">Empréstimos</a>
+                    <td th:text="${livro.titulo}"></td>
+                    <td th:text="${livro.autor != null ? livro.autor.nome : ''}"></td>
+                    <td th:text="${livro.categoria != null ? livro.categoria.genero : ''}"></td>
+                    <td th:text="${livro.isbn}"></td>
+
+                    <td>
+                        <a th:href="@{/livros/editar/{id}(id=${status.index})}"
+                           class="botao-editar">
+                            Editar
+                        </a>
+
+                        <form th:action="@{/livros/excluir/{id}(id=${status.index})}"
+                              method="post">
+
+                            <input type="hidden" name="_method" value="DELETE">
+
+                            <button type="submit" class="botao-excluir">
+                                Excluir
+                            </button>
+
+                        </form>
+                    </td>
+
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(livros)}">
+                    <td colspan="5" class="mensagem-vazia">
+                        Nenhum livro cadastrado ainda.
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
 
         </div>
 
@@ -76,9 +207,7 @@
 
 <footer>
     <a th:href="@{/}" class="logo">BIBLIOTECA</a>
-
-        <p>Leia livros.</p>
-
+    <p>Leia livros e arrase na vida.</p>
     <span>Biblioteca Digital © 2026</span>
 </footer>
 

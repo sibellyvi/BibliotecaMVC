@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Biblioteca Digital</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <a th:href="@{/}" class="logo">BIBLIOTECA</a>
+
+    <div class="acoes">
+        <a href="#modulos" class="botao-outline">Explorar módulos</a>
+    </div>
+
+</header>
+
+<main>
+
+    <section class="hero">
+
+        <div class="hero-texto">
+
+            <h1>Boas-vindas ao sistema de biblioteca</h1>
+
+            <p>Gerencie toda a sua biblioteca por aqui.</p>
+
+        </div>
+
+        <div class="hero-visual">
+            <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdW0W7C7n0tjMGNBUffqcwEtdWpzRJJkOjYceWLZYrYg&s=10"
+                    alt="Ilustração da biblioteca digital">
+        </div>
+
+    </section>
+
+    <section class="modulos" id="modulos">
+
+        <div class="linha"></div>
+
+        <h2>Conheça nossos módulos</h2>
+
+        <div class="lista-modulos">
+
+            <a th:href="@{/livros}">Livros</a>
+            <a th:href="@{/autores}">Autores</a>
+            <a th:href="@{/categorias}">Categorias</a>
+            <a th:href="@{/usuarios}">Usuários</a>
+            <a th:href="@{/emprestimos}">Empréstimos</a>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <a th:href="@{/}" class="logo">BIBLIOTECA</a>
+
+    <p>Leia livros e arrase na vida.</p>
+
+    <span>Biblioteca Digital © 2026</span>
+
+</footer>
+
+</body>
+</html>

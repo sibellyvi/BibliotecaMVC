@@ -1,9 +1,12 @@
 package com.example.bliblioteca.model;
 
+import java.util.List;
+
 public class Autor {
     private String nome;
     private String nacionalidade;
     private String obrasPublicadas;
+    private List<Livro> livros;
 
     public String getNome() {
         return nome;
@@ -27,5 +30,13 @@ public class Autor {
 
     public void setObrasPublicadas(String obrasPublicadas) {
         this.obrasPublicadas = obrasPublicadas;
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        this.livros = livros;
     }
 }

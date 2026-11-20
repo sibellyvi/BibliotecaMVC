@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Autores - Biblioteca</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header class="cabecalho">
+    <a th:href="@{/}" class="logo">BIBLIOTECA</a>
+    <a th:href="@{/}" class="botao-outline">Voltar ao início</a>
+</header>
+
+<main class="pagina-conteudo">
+
+    <h1>Gerenciar autores</h1>
+
+    <p class="descricao">
+        Cadastre e gerencie os autores das obras disponíveis na biblioteca.
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 45px; margin-bottom: 60px;">
+
+        <section class="formulario"
+                 th:if="${indice == null}"
+                 style="flex: 1 1 350px; margin-bottom: 0;">
+
+            <h2>Cadastrar autor</h2>
+
+            <form th:action="@{/autores}"
+                  th:object="${autor}"
+                  method="post">
+
+                <label for="nome">Nome do autor</label>
+                <input type="text"
+                       id="nome"
+                       th:field="*{nome}"
+                       placeholder="Digite o nome do autor"
+                       required>
+
+                <label for="nacionalidade">Nacionalidade</label>
+                <input type="text"
+                       id="nacionalidade"
+                       th:field="*{nacionalidade}"
+                       placeholder="Digite a nacionalidade"
+                       required>
+
+                <label for="obrasPublicadas">Obras publicadas</label>
+                <input type="text"
+                       id="obrasPublicadas"
+                       th:field="*{obrasPublicadas}"
+                       placeholder="Digite as obras publicadas"
+                       required>
+
+                <button type="submit" class="botao-salvar">
+                    Cadastrar autor
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="formulario"
+                 th:unless="${indice == null}"
+                 style="flex: 1 1 350px; margin-bottom: 0;">
+
+            <h2>Editar autor</h2>
+
+            <form th:action="@{/autores/editar/{id}(id=${indice})}"
+                  th:object="${autor}"
+                  method="post">
+
+                <label for="nome-editar">Nome do autor</label>
+                <input type="text"
+                       id="nome-editar"
+                       th:field="*{nome}"
+                       required>
+
+                <label for="nacionalidade-editar">Nacionalidade</label>
+                <input type="text"
+                       id="nacionalidade-editar"
+                       th:field="*{nacionalidade}"
+                       required>
+
+                <label for="obrasPublicadas-editar">Obras publicadas</label>
+                <input type="text"
+                       id="obrasPublicadas-editar"
+                       th:field="*{obrasPublicadas}"
+                       required>
+
+                <button type="submit" class="botao-salvar">
+                    Salvar alterações
+                </button>
+
+                <a th:href="@{/autores}" class="botao-cancelar">
+                    Cancelar edição
+                </a>
+
+            </form>
+
+        </section>
+
+        <div style="flex: 1 1 280px; display: flex; justify-content: center;">
+
+            <img
+                    src="https://i.pinimg.com/736x/50/1c/8a/501c8a7e08a67d00c3117a5e9a72e43c.jpg"
+                    alt="Ilustração para gerenciamento de autores"
+                    style="width: 100%; max-width: 380px; max-height: 430px; object-fit: contain; border-radius: 12px;">
+
+        </div>
+
+    </div>
+
+    <section>
+
+        <h2>Autores cadastrados</h2>
+
+        <div class="tabela-container">
+
+            <table class="tabela">
+
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Nacionalidade</th>
+                    <th>Obras publicadas</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="autor, status : ${autores}">
+
+                    <td th:text="${autor.nome}"></td>
+                    <td th:text="${autor.nacionalidade}"></td>
+                    <td th:text="${autor.obrasPublicadas}"></td>
+
+                    <td>
+                        <a th:href="@{/autores/editar/{id}(id=${status.index})}"
+                           class="botao-editar">
+                            Editar
+                        </a>
+
+                        <form th:action="@{/autores/excluir/{id}(id=${status.index})}"
+                              method="post">
+
+                            <input type="hidden" name="_method" value="DELETE">
+
+                            <button type="submit" class="botao-excluir">
+                                Excluir
+                            </button>
+
+                        </form>
+                    </td>
+
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(autores)}">
+                    <td colspan="4" class="mensagem-vazia">
+                        Nenhum autor cadastrado ainda.
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <a th:href="@{/}" class="logo">BIBLIOTECA</a>
+    <p>Leia livros e arrase na vida.</p>
+    <span>Biblioteca Digital © 2026</span>
+</footer>
+
+</body>
+</html>

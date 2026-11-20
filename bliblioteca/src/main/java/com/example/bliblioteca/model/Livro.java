@@ -2,7 +2,8 @@ package com.example.bliblioteca.model;
 
 public class Livro {
     private String titulo;
-    private String autor;
+    private Autor autor;
+    private Categoria categoria;
     private String isbn;
 
     public String getTitulo() {
@@ -13,19 +14,27 @@ public class Livro {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public String getIsbn() {
         return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 }

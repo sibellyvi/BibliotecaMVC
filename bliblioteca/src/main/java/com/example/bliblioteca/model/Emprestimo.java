@@ -1,10 +1,11 @@
 package com.example.bliblioteca.model;
-import java.time.LocalDate;
 
 public class Emprestimo {
     private String dataEmprestimo;
     private String dataPrevisaoDevolucao;
     private String dataDevolucao;
+    private Livro livro;
+    private Usuario usuario;
 
     public String getDataEmprestimo() {
         return dataEmprestimo;
@@ -28,5 +29,21 @@ public class Emprestimo {
 
     public void setDataDevolucao(String dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
